@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seletor de Fantasias de Halloween 🎃</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0933 0%, #2d1b4e 50%, #1a0933 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+ 
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+ 
+        h1 {
+            color: #ff6b00;
+            font-size: 3em;
+            text-align: center;
+            margin: 20px 0 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 107, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+ 
+        .subtitle {
+            color: #d4a5ff;
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+ 
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+ 
+        .carousel-wrapper {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 107, 0, 0.3);
+        }
+ 
+        .carousel-container {
+            overflow: hidden;
+            height: 420px;
+            position: relative;
+            border-radius: 15px;
+        }
+ 
+        .carousel {
+            display: flex;
+            gap: 20px;
+            transition: none;
+            padding: 10px;
+        }
+ 
+        .carousel.spinning {
+            transition: transform 3.5s cubic-bezier(0.17, 0.67, 0.3, 0.98);
+        }
+ 
+        .card {
+            min-width: 280px;
+            height: 400px;
+            background: linear-gradient(145deg, #2d1b4e, #1a0933);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 107, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+ 
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(255, 107, 0, 0.4);
+        }
+ 
+        .card.selected {
+            border: 3px solid #ff6b00;
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
+            transform: scale(1.05);
+        }
+ 
+        .card-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 107, 0, 0.3);
+        }
+ 
+        .card-title {
+            color: #ff6b00;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+ 
+        .card-description {
+            color: #d4a5ff;
+            text-align: center;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+ 
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+ 
+        .spin-button {
+            background: linear-gradient(135deg, #ff6b00, #ff8c00);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+ 
+        .spin-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.7);
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+        }
+ 
+        .spin-button:active:not(:disabled) {
+            transform: translateY(-1px);
+        }
+ 
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+ 
+        .result {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 107, 0, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+ 
+        .result-text {
+            color: #ff6b00;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+ 
+        .emoji {
+            font-size: 1.3em;
+            margin: 0 5px;
+        }
+ 
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+ 
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="floating">🎃 Seletor de Fantasias de Halloween 🎃</h1>
+    <p class="subtitle">Clique no botão e descubra sua fantasia perfeita!</p>
+    
+    <div class="container">
+        <div class="carousel-wrapper">
+            <div class="carousel-container">
+                <div class="carousel" id="carousel"></div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="spin-button" id="spinButton" onclick="spinCarousel()">
+                👻 Sortear Fantasia 👻
+            </button>
+        </div>
+        
+        <div class="result" id="result">
+            <p class="result-text">Clique no botão para sortear sua fantasia!</p>
+        </div>
+    </div>
+ 
+    <script>
+        const costumes = [
+            { name: "Bruxa", description: "Clássica e misteriosa, com chapéu pontudo e vassoura mágica", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Vampiro", description: "Elegante e assustador, com capa preta e presas afiadas", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Fantasma", description: "Assustadoramente fofo, flutuando pelo ar", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Zumbi", description: "Assustador e decomposto, perfeito para assustar", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Múmia", description: "Envolta em bandagens antigas do Egito", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Lobisomem", description: "Feroz criatura da lua cheia", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Esqueleto", description: "Puro osso e diversão assustadora", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Abóbora", description: "Jack-o'-lantern sorridente e iluminado", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Demônio", description: "Criatura sinistra com chifres e tridente", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Palhaço Assustador", description: "Sorriso sinistro que causa arrepios", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Caveira Mexicana", description: "Colorida e festiva, celebrando o Dia dos Mortos", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Sereia das Trevas", description: "Misteriosa criatura dos mares sombrios", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Espantalho", description: "Guardião dos campos com sorriso sinistro", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Anjo Caído", description: "Divino e sombrio, entre luz e trevas", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Boneco Vodu", description: "Misterioso e enigmático, cheio de alfinetes", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Cientista Louco", description: "Genial e excêntrico, com experimentos perigosos", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… }
+        ];
+ 
+        let isSpinning = false;
+        const carousel = document.getElementById('carousel');
+        const spinButton = document.getElementById('spinButton');
+        const result = document.getElementById('result');
+ 
+        function initCarousel() {
+            carousel.innerHTML = '';
+            const copies = 5;
+            for (let i = 0; i < copies; i++) {
+                costumes.forEach(costume => {
+                    const card = createCard(costume);
+                    carousel.appendChild(card);
+                });
+            }
+        }
+ 
+        function createCard(costume) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${costume.image}" alt="${costume.name}" class="card-image">
+                <h3 class="card-title">${costume.name}</h3>
+                <p class="card-description">${costume.description}</p>
+            `;
+            return card;
+        }
+ 
+        function spinCarousel() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            spinButton.disabled = true;
+            result.innerHTML = '<p class="result-text">🎰 Sorteando... 🎰</p>';
+            
+            // Remove seleção anterior
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sorteia uma fantasia
+            const randomIndex = Math.floor(Math.random() * costumes.length);
+            const selectedCostume = costumes[randomIndex];
+            
+            // Remove transição temporariamente
+            carousel.style.transition = 'none';
+            
+            // Posiciona no início (bem à esquerda para dar espaço para girar)
+            const cardWidth = 300;
+            carousel.style.transform = 'translateX(0px)';
+            
+            // Força o reflow
+            carousel.offsetHeight;
+            
+            // Adiciona transição de volta
+            carousel.style.transition = 'transform 3.5s cubic-bezier(0.17, 0.67, 0.3, 0.98)';
+            
+            // Calcula posição final
+            const middleCopyIndex = 2;
+            const extraSpins = cardWidth * costumes.length * 2; // 2 voltas completas
+            const targetPosition = -(middleCopyIndex * costumes.length * cardWidth + randomIndex * cardWidth - window.innerWidth / 2 + cardWidth / 2 + extraSpins);
+            
+            // Inicia a animação
+           // Após a animação (3.5s)
+           setTimeout(() => {
+                // Marca o card selecionado
+                const allCards = document.querySelectorAll('.card');
+                const selectedCardIndex = middleCopyIndex * costumes.length + randomIndex;
+                if (allCards[selectedCardIndex]) {
+                    allCards[selectedCardIndex].classList.add('selected');
+                    // Centraliza o card selecionado suavemente
+                    allCards[selectedCardIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'center'
+                    });
+                }
+                
+                result.innerHTML = `
+                    <p class="result-text">
+                        <span class="emoji">🎉</span>
+                        Sua fantasia é: <strong>${selectedCostume.name}</strong>!
+                        <span class="emoji">🎉</span>
+                    </p>
+                `;
+                
+                isSpinning = false;
+                spinButton.disabled = false;
+            }, 100);
+        }
+ 
+        // Inicializa o carrossel
+        initCarousel();
+    </script>
+</body>
+</html>
+ 
