@@ -237,23 +237,23 @@
     </div>
  
     <script>
-    const costumes = [
-            { name: "Bruxa 🧙‍♀️", description: "Clássica e misteriosa, com chapéu pontudo e vassoura mágica", emoji: "🧙‍♀️" },
-            { name: "Vampiro 🧛", description: "Elegante e assustador, com capa preta e presas afiadas", emoji: "🧛" },
-            { name: "Fantasma 👻", description: "Assustadoramente fofo, flutuando pelo ar", emoji: "👻" },
-            { name: "Zumbi 🧟", description: "Assustador e decomposto, perfeito para assustar", emoji: "🧟" },
-            { name: "Múmia 🧟‍♂️", description: "Envolta em bandagens antigas do Egito", emoji: "🧟‍♂️" },
-            { name: "Lobisomem 🐺", description: "Feroz criatura da lua cheia", emoji: "🐺" },
-            { name: "Esqueleto 💀", description: "Puro osso e diversão assustadora", emoji: "💀" },
-            { name: "Abóbora 🎃", description: "Jack-o'-lantern sorridente e iluminado", emoji: "🎃" },
-            { name: "Demônio 😈", description: "Criatura sinistra com chifres e tridente", emoji: "😈" },
-            { name: "Palhaço 🤡", description: "Sorriso sinistro que causa arrepios", emoji: "🤡" },
-            { name: "Caveira Mexicana 💀", description: "Colorida e festiva, celebrando o Dia dos Mortos", emoji: "💀" },
-            { name: "Sereia 🧜‍♀️", description: "Misteriosa criatura dos mares sombrios", emoji: "🧜‍♀️" },
-            { name: "Espantalho 🌾", description: "Guardião dos campos com sorriso sinistro", emoji: "🌾" },
-            { name: "Anjo Caído 👼", description: "Divino e sombrio, entre luz e trevas", emoji: "👼" },
-            { name: "Boneco Vodu 🪆", description: "Misterioso e enigmático, cheio de alfinetes", emoji: "🪆" },
-            { name: "Cientista Louco 🧪", description: "Genial e excêntrico, com experimentos perigosos", emoji: "🧪" }
+        const costumes = [
+            { name: "Bruxa", description: "Clássica e misteriosa, com chapéu pontudo e vassoura mágica", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Vampiro", description: "Elegante e assustador, com capa preta e presas afiadas", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Fantasma", description: "Assustadoramente fofo, flutuando pelo ar", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Zumbi", description: "Assustador e decomposto, perfeito para assustar", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Múmia", description: "Envolta em bandagens antigas do Egito", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Lobisomem", description: "Feroz criatura da lua cheia", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Esqueleto", description: "Puro osso e diversão assustadora", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Abóbora", description: "Jack-o'-lantern sorridente e iluminado", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Demônio", description: "Criatura sinistra com chifres e tridente", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Palhaço Assustador", description: "Sorriso sinistro que causa arrepios", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Caveira Mexicana", description: "Colorida e festiva, celebrando o Dia dos Mortos", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Sereia das Trevas", description: "Misteriosa criatura dos mares sombrios", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Espantalho", description: "Guardião dos campos com sorriso sinistro", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Anjo Caído", description: "Divino e sombrio, entre luz e trevas", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Boneco Vodu", description: "Misterioso e enigmático, cheio de alfinetes", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… },
+            { name: "Cientista Louco", description: "Genial e excêntrico, com experimentos perigosos", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231a0933' width='200' height=… }
         ];
  
         let isSpinning = false;
